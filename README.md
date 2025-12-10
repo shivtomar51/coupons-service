@@ -242,27 +242,47 @@ mvn clean package
 
 # Age Prediction API Integration (3rd Party API Demo)
 
-This module demonstrates how a third-party API is integrated into a Spring Boot application and how the response is stored into a database.
+This module is implemented **inside the existing Coupon Management Project** as a **separate feature** using independent:
+- Controller
+- Service
+- Entity
+- Repository
+
+It demonstrates how a third-party API is integrated into a Spring Boot application and how the response is stored into a database.
+
+---
 
 ## 🔹 Use Case
 - User enters a name (example: Shiv)
 - Application calls a third-party API (Agify)
 - Age data is received from the API
-- The response is saved into the database
+- The response is saved into a separate database table
 - The saved data is returned as the API response
 
+---
+
 ## 🔹 Third-Party API Used
-Agify API  
-https://api.agify.io?name=Shiv
+Agify API
 
-Sample Response:
-```json
-{
-  "name": "shiv",
-  "age": 64,
-  "count": 12345
-}
+🔹 API Endpoint
+GET /api/age/predict?name=Shiv
 
+🔹 Internal Project Structure (Newly Added for This Feature)
+
+This integration was added as a separate module inside the existing Coupon project using the following new classes:
+Controller: AgePredictionController
+Service: AgePredictionService
+Entity: AgePrediction
+Repository: AgePredictionRepository
+Config: RestTemplateConfig
+These components work independently and do not affect the existing coupon flow.
+
+🔹 Flow
+AgePredictionController receives the request
+AgePredictionService calls the Agify API using RestTemplate
+API response is mapped to the AgePrediction entity
+Data is saved using AgePredictionRepository
+The saved record is returned as the API response
 
 ## 👨‍💻 Author
 

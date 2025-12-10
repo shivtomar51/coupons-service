@@ -262,27 +262,41 @@ It demonstrates how a third-party API is integrated into a Spring Boot applicati
 ---
 
 ## 🔹 Third-Party API Used
-Agify API
+**Agify API**
 
-🔹 API Endpoint
+---
+
+## 🔹 API Endpoint
 GET /api/age/predict?name=Shiv
 
-🔹 Internal Project Structure (Newly Added for This Feature)
 
-This integration was added as a separate module inside the existing Coupon project using the following new classes:
-Controller: AgePredictionController
-Service: AgePredictionService
-Entity: AgePrediction
-Repository: AgePredictionRepository
-Config: RestTemplateConfig
+
+---
+
+## 🔹 Internal Project Structure (Newly Added for This Feature)
+
+This integration was added as a **separate module inside the existing Coupon Project** using the following new classes:
+
+- **Controller:** `AgePredictionController`
+- **Service:** `AgePredictionService`
+- **Entity:** `AgePrediction`
+- **Repository:** `AgePredictionRepository`
+- **Config:** `RestTemplateConfig`
+
 These components work independently and do not affect the existing coupon flow.
 
-🔹 Flow
-AgePredictionController receives the request
-AgePredictionService calls the Agify API using RestTemplate
-API response is mapped to the AgePrediction entity
-Data is saved using AgePredictionRepository
-The saved record is returned as the API response
+---
+
+## 🔹 Flow
+1. `AgePredictionController` receives the request
+2. `AgePredictionService` calls the Agify API using `RestTemplate`
+3. API response is mapped to the `AgePrediction` entity
+4. Data is saved using `AgePredictionRepository`
+5. The saved record is returned as the API response
+
+---
+
+✅ This implementation demonstrates **real-time third-party API integration with database persistence** inside a production-style Spring Boot project.
 
 ## 👨‍💻 Author
 

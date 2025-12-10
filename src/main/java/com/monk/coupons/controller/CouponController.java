@@ -23,27 +23,31 @@ public class CouponController {
     private final CouponEngine engine;
     private final CouponService couponService;
 
+
     public CouponController(CouponRepository repo, CouponEngine engine, CouponService couponService) {
         this.repo = repo;
         this.engine = engine;
         this.couponService = couponService;
     }
 
+    // this api is for admin only
     @PostMapping
     public Coupon create(@RequestBody Coupon coupon) {
         return repo.save(coupon);
     }
 
+    // admin
     @GetMapping
     public List<Coupon> all() {
         return repo.findAll();
     }
 
+    //admin
     @GetMapping("{id}")
     public ResponseEntity<Coupon> get(@PathVariable Long id) {
         return repo.findById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
-
+    //admin
     @PutMapping("{id}")
     public ResponseEntity<Coupon> update(@PathVariable Long id, @RequestBody Coupon input) {
         return repo.findById(id).map(c -> {
@@ -52,6 +56,7 @@ public class CouponController {
         }).orElse(ResponseEntity.notFound().build());
     }
 
+    // admin
     @DeleteMapping("{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         if (!repo.existsById(id)) return ResponseEntity.notFound().build();
@@ -59,6 +64,7 @@ public class CouponController {
         return ResponseEntity.ok().build();
     }
 
+    // user
     // Applicable coupons for a cart:
     @PostMapping("/applicable")
     public List<ApplicableCouponDTO> applicable(@RequestBody CartDTO cart) {
@@ -73,6 +79,7 @@ public class CouponController {
         return out;
     }
 
+    // user
     // Apply a specific coupon
     @PostMapping("/apply/{id}")
     public ResponseEntity<?> apply(@PathVariable Long id, @RequestBody CartDTO cart) {
@@ -87,4 +94,6 @@ public class CouponController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
+
+
 }

@@ -237,6 +237,33 @@ mvn clean package
 
 ---
 
+
+
+
+# Age Prediction API Integration (3rd Party API Demo)
+
+This module demonstrates how a third-party API is integrated into a Spring Boot application and how the response is stored into a database.
+
+## 🔹 Use Case
+- User enters a name (example: Shiv)
+- Application calls a third-party API (Agify)
+- Age data is received from the API
+- The response is saved into the database
+- The saved data is returned as the API response
+
+## 🔹 Third-Party API Used
+Agify API  
+https://api.agify.io?name=Shiv
+
+Sample Response:
+```json
+{
+  "name": "shiv",
+  "age": 64,
+  "count": 12345
+}
+
+
 ## 👨‍💻 Author
 
 Shiv Tomar
